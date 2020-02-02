@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- {% load static %}
+    <link rel="stylesheet" href="{% static 'books_authors_app/css/style.css' %}"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Books and Authors</title>
+</head>
+
+<body style= 'text-align: center'>
+    <div class="jumbotron jumbotron-fluid" >
+        <div class="container">
+            <h1 class="display-4">Add a Book</h1>
+            <!-- <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p> -->
+        </div>
+    </div>
+    <form style = 'display: inline-block; width: 400px;' action= 'book/add' method='POST'>
+        {%csrf_token %}
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" name="title">
+        </div>
+        <div class="form-group">
+            <label for="Description">Description</label>
+            <textarea class='form-control' name='description' rows='3'></textarea>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Add" name="add_book">
+    </form>
+    <table class='table table-dark' style = 'display: inline-block; width: 225px'>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+                <tr>
+                    <td>{{book.id}}</td>
+                    <td>{{book.title}}</td>
+                    <td><a href= '/book/{{book.id}}/show_description' name='show_description'>View</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+
+
+</body>
+
+</html>

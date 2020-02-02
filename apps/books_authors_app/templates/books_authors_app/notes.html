@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Notes Description</title>
+</head>
+
+<body>
+    <div class="jumbotron">
+        <h1 class="display-4">Author name: {{author.first_name}} {{author.last_name}}</h1>
+        <h2>ID: {{author.id}}</h2>
+        <p class="lead">Description: {{author.notes}}</p>
+        <hr class="my-4">
+        <h2>Books:</h2>
+        <ul>
+            {% for books in authors.books.all %}
+            <li>{{books.title}}</li>
+            {% endfor %}
+        </ul>
+        <div>
+            <form action='add_additional_book' method='POST'>
+                {%csrf_token %}
+                <select name="book">
+                    {% for book in books %}
+                    <option value={{book.id}}>{{book.title}}</option>
+                    {% endfor %}
+                </select>
+                <input type='submit' value='Add' name='submit'>
+            </form>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
